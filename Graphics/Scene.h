@@ -6,6 +6,7 @@ class Scene
 {
 public:
 	Scene(int width, int height, const char* title);
+	Scene() {};
 	~Scene();
 	void Draw();
 
