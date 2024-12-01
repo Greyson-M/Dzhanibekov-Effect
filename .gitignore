@@ -15,6 +15,12 @@
 *.filters
 *.user
 
+Renderer.vcxproj.user
+Renderer.vcxproj.filters
+Renderer.vcxproj
+Renderer.sln
+.vs/
+
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -366,3 +372,4 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Renderer.vcxproj
