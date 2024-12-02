@@ -1,20 +1,27 @@
 #pragma once
 
 #include "Graphics/Model.h"
-#include "Environment.h"
+#include "settings.h"
+
 
 class PhysObject
 {
 public:
-	PhysObject(const char* model_path, Environment* env);
+	PhysObject(Model model);
+	PhysObject(const char* model_path);
+
+	~PhysObject();
+
 	void update();
+
+	Model* get_model_ptr() { return &model; }
+
+	void translate(glm::vec3 translation) { model.setTranslation(translation); }
+	void rotate(glm::quat rotation) { model.setOrientation(rotation); }
+	void scale(glm::vec3 scale) { model.setScale(scale); }
 
 private:
 	Model model;
-	Environment* environment;
-
-	Camera* camera;
-	Shader* shader;
 
 	glm::float32 mass;
 	

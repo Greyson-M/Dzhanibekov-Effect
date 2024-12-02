@@ -1,27 +1,31 @@
 #include"Model.h"
 
-
-
 Model::Model(const char* file)
 {
+
+	meshes = std::vector<Mesh>();
+
 	// Make a JSON object
 	std::string text = get_file_contents(file);
 	JSON = json::parse(text);
 
 	// Get the binary data
-	Model::file = file;
+	this->file = file;
 	data = getData();
 
 	// Traverse all nodes
 	traverseNode(0);
+
+	std::cout << "Model object created" << std::endl;
+
 }
 
-void Model::Draw(Shader& shader, Camera& camera)
+void Model::Draw_model(Shader& shader, Camera& camera)
 {
 	// Go over all meshes and draw each one
-	for (unsigned int i = 0; i < meshes.size(); i++)
+	for (unsigned int i = 0; i < this->meshes.size(); i++)
 	{
-		meshes[i].Mesh::Draw(shader, camera, matricesMeshes[i],
+		this->meshes[i].Draw_mesh(shader, camera, matricesMeshes[i],
 			translationsMeshes[i], rotationsMeshes[i], scalesMeshes[i]);
 	}
 }

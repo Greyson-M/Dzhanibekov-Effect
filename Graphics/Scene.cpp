@@ -54,15 +54,18 @@ Scene::Scene(int width, int height, const char* title)
 	camera = Camera(width, height, glm::vec3(0.0f, 0.0f, 2.0f));
 
 	// Variables to create periodic event for FPS displaying
-	double prevTime = 0.0;
-	double crntTime = 0.0;
-	double timeDiff;
+	this->prevTime = 0.0;
+	this->crntTime = 0.0;
+	this->timeDiff;
 	// Keeps track of the amount of frames in timeDiff
-	unsigned int counter = 0;
+	this->counter = 0;
 
 	// Use this to disable VSync (not advized)
 	//glfwSwapInterval(0);
 
+	const char* floor_path = "E:/Programming/physics/DzhanibekovEffect/c++vs/Renderer/Resources/Models/floor/scene.gltf";
+	floor_model = new Model(floor_path);
+	addModel(floor_model);
 }
 
 Scene::~Scene()
@@ -114,7 +117,7 @@ void Scene::Draw()
 	/*model.Draw(shaderProgram, camera);*/
 	for (int i = 0; i < models.size(); i++)
 	{
-		models[i].Draw(shaderProgram, camera);
+		models[i]->Draw_model(shaderProgram, camera);
 	}
 
 
@@ -124,9 +127,17 @@ void Scene::Draw()
 	glfwPollEvents();
 }
 
-Model* Scene::addModel(const char* modelPath)
+void Scene::addModel(Model* model)
 {
-	Model model = Model(modelPath);
 	models.push_back(model);
-	return &models[models.size() - 1];
 }
+
+
+
+//
+//Model Scene::addModel(const char* modelPath)
+//{
+//	Model model = Model(modelPath);
+//	models.push_back(&model);
+//	return model;
+//}

@@ -1,25 +1,26 @@
 #pragma once
 
 #include "Graphics/Scene.h"
+#include "PhysObject.h"
 
 class Environment
 {
 public:
 	Environment(int width, int height, const char* title);
-	~Environment();
+	//~Environment();
 
-	void addPhysObject(void* physObject);
+	PhysObject* addPhysObject(const char* model_path);
 
-	glm::float32 floorHeight;
-	glm::float32 dt;
+	void update();
+	void draw();
+
+	void step() { update(); draw(); };
 
 	Scene* getScene() { return &scene; }
 
 private:
 	//vector of physobjects
-	std::vector<void*> physObjects;
+	std::vector<PhysObject> physObjects;
 
 	Scene scene;
-	
-
 };

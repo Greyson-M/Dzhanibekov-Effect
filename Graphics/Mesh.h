@@ -21,7 +21,7 @@ public:
 	Mesh(std::vector <Vertex>& vertices, std::vector <GLuint>& indices, std::vector <Texture>& textures);
 
 	// Draws the mesh
-	void Draw
+	void Draw_mesh
 	(
 		Shader& shader, 
 		Camera& camera,

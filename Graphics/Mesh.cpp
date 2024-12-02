@@ -23,7 +23,7 @@ Mesh::Mesh(std::vector <Vertex>& vertices, std::vector <GLuint>& indices, std::v
 }
 
 
-void Mesh::Draw
+void Mesh::Draw_mesh
 (
 	Shader& shader, 
 	Camera& camera,

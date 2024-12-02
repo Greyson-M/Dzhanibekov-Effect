@@ -12,9 +12,8 @@ class Model
 public:
 	// Loads in a model from a file and stores tha information in 'data', 'JSON', and 'file'
 	Model(const char* file);
-	Model() {};
 
-	void Draw(Shader& shader, Camera& camera);
+	void Draw_model(Shader& shader, Camera& camera);
 
 	void setOrientation(glm::quat orientation);
 	void setTranslation(glm::vec3 translation);

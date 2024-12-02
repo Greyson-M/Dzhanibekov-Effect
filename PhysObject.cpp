@@ -1,26 +1,44 @@
 #include "PhysObject.h"
 
-PhysObject::PhysObject(const char* model_path, Environment* env)
+PhysObject::PhysObject(Model model) : model(model)
 {
-	model = Model(model_path);
-	environment = env;
+	mass = 1.0f;
 
-	camera = environment->getScene()->getCamera();
-	shader = environment->getScene()->getShader();
+	acceleration = glm::vec3(0.0f, 0.0f, 0.0f);
+	velocity = glm::vec3(0.0f, 0.0f, 0.0f);
+
+	angularVelocity = glm::vec3(0.0f, 0.0f, 0.0f);
+	angularAcceleration = glm::vec3(0.0f, 0.0f, 0.0f);
+}
+
+PhysObject::PhysObject(const char* model_path) : model(model_path)
+{
+	mass = 1.0f;
+
+	acceleration = glm::vec3(0.0f, 0.0f, 0.0f);
+	velocity = glm::vec3(0.0f, 0.0f, 0.0f);
+
+	angularVelocity = glm::vec3(1.0f, 0.0f, 0.0f);
+	angularAcceleration = glm::vec3(0.0f, 0.0f, 0.0f);
+}
+
+PhysObject::~PhysObject()
+{
 }
 
 void PhysObject::update()
 {
-	acceleration = glm::vec3(0.0f, -9.8f, 0.0f);
-	velocity += acceleration * environment->dt;
-	model.setTranslation(model.getTranslation() + velocity * environment->dt);
+	acceleration = glm::vec3(0.0f, 0.0f, 0.0f);
+	velocity += acceleration * Settings().dt;
+	model.setTranslation(model.getTranslation() + velocity * Settings().dt);
 
-	if (model.getTranslation().y < environment->floorHeight)
+	if (model.getTranslation().y < Settings().floor_height)
 	{
-		model.setTranslation(glm::vec3(model.getTranslation().x, environment->floorHeight, model.getTranslation().z));
+		model.setTranslation(glm::vec3(model.getTranslation().x, Settings().floor_height, model.getTranslation().z));
 		velocity = glm::vec3(0.0f, 0.0f, 0.0f);
 	}
 
-	model.Draw(*shader, *camera);
+	//time for inertia tensor
+	//then eulers equations of rigid body motion
 
 }
