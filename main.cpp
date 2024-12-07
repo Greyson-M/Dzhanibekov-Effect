@@ -5,7 +5,7 @@ int main()
 {
 	//const char* modelPath = "E:/Programming/physics/DzhanibekovEffect/c++vs/Renderer/Resources/Models/tinytoplong/scene.gltf";
 	//const char* modelPath = "E:/Programming/physics/DzhanibekovEffect/c++vs/Renderer/Resources/models/TOP/scene.gltf";
-	const char* modelPath = "E:/Programming/physics/DzhanibekovEffect/c++vs/Renderer/Resources/models/test/scene.gltf";
+	const char* modelPath = "E:/Programming/physics/DzhanibekovEffect/c++vs/Renderer/Resources/models/test2/scene.gltf";
 
 	//Scene scene(width, height, "test");
 	//Model* bunny = scene.addModel(modelPath);

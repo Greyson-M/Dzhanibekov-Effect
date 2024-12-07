@@ -2,23 +2,23 @@
 
 PhysObject::PhysObject(Model model) : model(model)
 {
-	acceleration = glm::vec3(0.0f, 0.0f, 0.0f);
-	velocity = glm::vec3(0.0f, 0.0f, 0.0f);
-	com = glm::vec3(0.0f, 0.0f, 0.0f);
+	acceleration = glm::f64vec3(0.0, 0.0, 0.0);
+	velocity = glm::f64vec3(0.0, 0.0, 0.0);
+	com = glm::f64vec3(0.0, 0.0, 0.0);
 
-	omega = glm::vec3(0.0f, 0.0f, 0.0f);
+	omega = glm::f64vec3(0.0, 0.0, 0.0);
 
-	glm::float32 volume = 0.0f;
+	glm::float64 volume = 0.0;
 
 	compute_inertia_tensor(1.0f, &I, &com, &mass, &volume);
 
 	I_inv = glm::inverse(I);
-	//L = glm::vec3(0.0f, 0.01f, 3.0f);
-	//L = glm::vec3(0.02f, 0.0f, 0.00001f);		//test2
-	L = glm::vec3(16.0f, 0.0f, 0.0f);			//test
+	//L = glm::f64vec3(0.0, 0.01, 3.0);
+	L = glm::f64vec3(0.02, 0.0001, 0.0);		//test2
+	//L = glm::f64vec3(25.0, 0.0, 0.0);			//test
 
 	//translate to COMs
-	glm::vec3 curr_pos = model.getTranslation();
+	glm::f64vec3 curr_pos = model.getTranslation();
 	model.setTranslation(curr_pos - com);
 
 	std::cout << "Mass: " << mass << std::endl;
@@ -41,9 +41,9 @@ PhysObject::~PhysObject()
 {
 }
 
-static glm::mat3 cross_mat(glm::vec3 v)
+static glm::mat3 cross_mat(glm::f64vec3 v)
 {
-	return glm::mat3(0.0f, -v.z, v.y,
+	return glm::f64mat3(0.0f, -v.z, v.y,
 					v.z, 0.0f, -v.x,
 					-v.y, v.x, 0.0f);
 }
@@ -52,7 +52,7 @@ void PhysObject::update()
 {
 	//glm::quat q = model.getOrientation();
 	//glm::mat3 R = model.getOrientation_mat();
-	glm::mat3 R = glm::mat3_cast(glm::normalize(model.getOrientation()));
+	glm::f64mat3 R = glm::mat3_cast(glm::normalize(model.getOrientation()));
 
 	//glm::mat3 omega_cross = cross_mat(omega);
 	//glm::mat3 R_dot = omega_cross * R;
@@ -61,14 +61,14 @@ void PhysObject::update()
 
 	//ensure r_prime will be orthonormal
 
-	glm::mat3 R_T = glm::transpose(R);
+	glm::f64mat3 R_T = glm::transpose(R);
 
-	glm::mat3 otho_check = R * R_T;
+	glm::f64mat3 otho_check = R * R_T;
 
 
 	omega = R * I_inv * R_T * L;
-	glm::quat q = model.getOrientation();
-	glm::quat q_dot = 0.5f * glm::quat(0.0f, omega.x, omega.y, omega.z) * q;
+	glm::f64quat q = model.getOrientation();
+	glm::f64quat q_dot = 0.5 * glm::f64quat(0.0f, omega.x, omega.y, omega.z) * q;
 
 	//glm::mat3 R_prime = R + Settings().dt * glm::matrixCross3(omega) * R;
 	//glm::vec3 omega_cross_Rx = glm::cross(omega, R[0]);
@@ -82,12 +82,12 @@ void PhysObject::update()
 	//glm::quat q_prime = glm::normalize(q + Settings().dt * q_dot);
 	
 	//rk4 integration of q
-	glm::quat k1 = 0.5f * glm::quat(0.0f, omega.x, omega.y, omega.z) * q;
-	glm::quat k2 = 0.5f * glm::quat(0.0f, omega.x, omega.y, omega.z) * (q + 0.5f * Settings().dt * k1);
-	glm::quat k3 = 0.5f * glm::quat(0.0f, omega.x, omega.y, omega.z) * (q + 0.5f * Settings().dt * k2);
-	glm::quat k4 = 0.5f * glm::quat(0.0f, omega.x, omega.y, omega.z) * (q + Settings().dt * k3);
+	glm::f64quat k1 = 0.5 * glm::f64quat(0.0f, omega.x, omega.y, omega.z) * q;
+	glm::f64quat k2 = 0.5 * glm::f64quat(0.0f, omega.x, omega.y, omega.z) * (q + 0.5f * Settings().dt * k1);
+	glm::f64quat k3 = 0.5 * glm::f64quat(0.0f, omega.x, omega.y, omega.z) * (q + 0.5f * Settings().dt * k2);
+	glm::f64quat k4 = 0.5 * glm::f64quat(0.0f, omega.x, omega.y, omega.z) * (q + Settings().dt * k3);
 
-	glm::quat q_prime = q + (Settings().dt / 6.0f) * (k1 + 2.0f * k2 + 2.0f * k3 + k4);
+	glm::f64quat q_prime = q + (Settings().dt / 6.0) * (k1 + 2.0 * k2 + 2.0 * k3 + k4);
 
 	//R_prime = glm::orthonormalize(R_prime);
 
@@ -103,24 +103,24 @@ void PhysObject::update()
 	}
 
 	acceleration = glm::vec3(0.0f, 0.0f, 0.0f);
-	velocity += acceleration * Settings().dt;
-	model.setTranslation(model.getTranslation() + velocity * Settings().dt);
-	com += velocity * Settings().dt;
+	velocity += acceleration * (float)Settings().dt;
+	model.setTranslation(model.getTranslation() + velocity * (float)Settings().dt);
+	com += velocity * (float)Settings().dt;
 
 }
 
-glm::float32 PhysObject::ComputeInertiaMoment(glm::vec3* P, int I){
+glm::float64 PhysObject::ComputeInertiaMoment(glm::f64vec3* P, int I){
 
-	glm::float32 result = (P[0][I] * P[0][I]) + (P[1][I] * P[2][I])
+	glm::float64 result = (P[0][I] * P[0][I]) + (P[1][I] * P[2][I])
 						+ (P[1][I] * P[1][I]) + (P[0][I] * P[2][I])
 						+ (P[2][I] * P[2][I]) + (P[0][I] * P[1][I]);
 
 	return result;
 }
 
-glm::float32 PhysObject::ComputeInertiaProduct(glm::vec3* P, int I, int J)
+glm::float64 PhysObject::ComputeInertiaProduct(glm::f64vec3* P, int I, int J)
 {
-	glm::float32 result = 2.0f * (P[0][I] * P[0][J]) + (P[1][I] * P[2][J]) + (P[2][I] * P[1][J])
+	glm::float64 result = 2.0f * (P[0][I] * P[0][J]) + (P[1][I] * P[2][J]) + (P[2][I] * P[1][J])
 						+ 2.0f * (P[1][I] * P[1][J]) + (P[0][I] * P[2][J]) + (P[2][I] * P[0][J])
 						+ 2.0f * (P[2][I] * P[2][J]) + (P[0][I] * P[1][J]) + (P[1][I] * P[0][J]);
 
@@ -128,16 +128,16 @@ glm::float32 PhysObject::ComputeInertiaProduct(glm::vec3* P, int I, int J)
 }
 
 struct tri {
-	glm::vec3 P[3];
+	glm::f64vec3 P[3];
 };
 
-void PhysObject::compute_inertia_tensor(glm::float32 density, glm::mat3* I0_out, glm::vec3* CoM_out, glm::float32* M_out, glm::float32* Vol_out)
+void PhysObject::compute_inertia_tensor(glm::float64 density, glm::f64mat3* I0_out, glm::f64vec3* CoM_out, glm::float64* M_out, glm::float64* Vol_out)
 {
 	Mesh* mesh = model.getMesh(0);
 	
 	glm::float64 V = 0.0;
 	glm::float64 mass = 0.0;
-	glm::f64vec3 massCenter = glm::f64vec3(0.0, 0.0, 0.0);
+	glm::f64vec3 MassCenter = glm::f64vec3(0.0, 0.0, 0.0);
 	//glm::vec3 MassCenter = glm::vec3(0.0f, 0.0f, 0.0f);
 	glm::float64 Ia = 0.0, Ib = 0.0, Ic = 0.0, Iap = 0.0, Ibp = 0.0, Icp = 0.0;
 
@@ -159,7 +159,7 @@ void PhysObject::compute_inertia_tensor(glm::float32 density, glm::mat3* I0_out,
 
 	for (int i = 0; i < faces.size(); i++)
 	{
-		glm::vec3 P[3];
+		glm::f64vec3 P[3];
 
 		P[0] = faces[i].P[2];
 		P[1] = faces[i].P[1];
@@ -171,10 +171,10 @@ void PhysObject::compute_inertia_tensor(glm::float32 density, glm::mat3* I0_out,
 
 		//}
 
-		glm::float32 detJ = glm::dot(P[0], glm::cross(P[1], P[2]));
-		glm::float32 tetraVol = detJ / 6.0f;
-		glm::float32 tetraMass = density * tetraVol;
-		glm::vec3 tetraCoM = (P[0] + P[1] + P[2]) / 4.0f;
+		glm::float64 detJ = glm::dot(P[0], glm::cross(P[1], P[2]));
+		glm::float64 tetraVol = detJ / 6.0;
+		glm::float64 tetraMass = density * tetraVol;
+		glm::f64vec3 tetraCoM = (P[0] + P[1] + P[2]) / 4.0;
 
 		Ia += detJ * (ComputeInertiaMoment(P, 1) + ComputeInertiaMoment(P, 2));
 		Ib += detJ * (ComputeInertiaMoment(P, 0) + ComputeInertiaMoment(P, 2));
@@ -189,13 +189,13 @@ void PhysObject::compute_inertia_tensor(glm::float32 density, glm::mat3* I0_out,
 	}
 
 	MassCenter = MassCenter / mass;
-	Ia = Ia * density / 60.0f - mass * (MassCenter.y * MassCenter.y + MassCenter.z * MassCenter.z);
-	Ib = Ib * density / 60.0f - mass * (MassCenter.x * MassCenter.x + MassCenter.z * MassCenter.z);
-	Ic = Ic * density / 60.0f - mass * (MassCenter.x * MassCenter.x + MassCenter.y * MassCenter.y);
+	Ia = Ia * density / 60.0 - mass * (MassCenter.y * MassCenter.y + MassCenter.z * MassCenter.z);
+	Ib = Ib * density / 60.0 - mass * (MassCenter.x * MassCenter.x + MassCenter.z * MassCenter.z);
+	Ic = Ic * density / 60.0 - mass * (MassCenter.x * MassCenter.x + MassCenter.y * MassCenter.y);
 
-	Iap = Iap * density / 120.0f - mass * MassCenter.y * MassCenter.z;
-	Ibp = Ibp * density / 120.0f - mass * MassCenter.x * MassCenter.y;
-	Icp = Icp * density / 120.0f - mass * MassCenter.x * MassCenter.z;
+	Iap = Iap * density / 120.0 - mass * MassCenter.y * MassCenter.z;
+	Ibp = Ibp * density / 120.0 - mass * MassCenter.x * MassCenter.y;
+	Icp = Icp * density / 120.0 - mass * MassCenter.x * MassCenter.z;
 
 	glm::mat3 I = glm::mat3(Ia, -Iap, -Ibp,
 							-Iap, Ib, -Icp,
