@@ -17,6 +17,7 @@ int main()
 
 	PhysObject* topobj = env->addPhysObject(modelPath);
 	topobj->translate(glm::vec3(0.0f, 1.0f, 0.0f));
+	topobj->rotate(glm::quat(0.0f, 0.0f, 1.0f, 0.0f));
 
 	Scene* scene = env->getScene();
 	GLFWwindow* window = scene->getWindow();

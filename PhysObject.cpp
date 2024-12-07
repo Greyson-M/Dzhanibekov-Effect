@@ -7,18 +7,18 @@ PhysObject::PhysObject(Model model) : model(model)
 	com = glm::vec3(0.0f, 0.0f, 0.0f);
 
 	omega = glm::vec3(0.0f, 0.0f, 0.0f);
-	angularAcceleration = glm::vec3(0.0f, 0.0f, 0.0f);
 
 	glm::float32 volume = 0.0f;
 
 	compute_inertia_tensor(1.0f, &I, &com, &mass, &volume);
 
 	I_inv = glm::inverse(I);
-	L = glm::vec3(0.0f, 3.0f, 0.1f);
+	L = glm::vec3(0.0f, 0.2f, 0.0f);
 
 	//translate to COMs
 	glm::vec3 curr_pos = model.getTranslation();
 	model.setTranslation(curr_pos - com);
+
 
 }
 
@@ -59,6 +59,8 @@ void PhysObject::update()
 	//ensure r_prime will be orthonormal
 
 	glm::mat3 R_T = glm::transpose(R);
+
+	glm::mat3 otho_check = R * R_T;
 
 
 	omega = R * I_inv * R_T * L;
