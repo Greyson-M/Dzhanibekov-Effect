@@ -67,7 +67,7 @@ void Mesh::Draw_mesh
 
 	// Transform the matrices to their correct form
 	trans = glm::translate(trans, translation);
-	rot = glm::mat4_cast(rotation);
+	rot = glm::mat4_cast(glm::normalize(rotation));
 	sca = glm::scale(sca, scale);
 
 	// Push the matrices to the vertex shader

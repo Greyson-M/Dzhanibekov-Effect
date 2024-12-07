@@ -32,7 +32,7 @@ vec4 pointLight()
 
 	// intensity of light with respect to distance
 	float dist = length(lightVec);
-	float a = 3.0;
+	float a = 0.5;
 	float b = 0.7;
 	float inten = 1.0f / (a * dist * dist + b * dist + 1.0f);
 
@@ -106,5 +106,5 @@ vec4 spotLight()
 void main()
 {
 	// outputs final color
-	FragColor = direcLight();
+	FragColor = pointLight();
 }

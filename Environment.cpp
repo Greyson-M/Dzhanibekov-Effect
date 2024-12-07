@@ -31,10 +31,13 @@ PhysObject* Environment::addPhysObject(const char* model_path)
 
 void Environment::update()
 {
-    for (int i = 0; i < physObjects.size(); i++)
-    {
-        physObjects[i].update();
-    }
+	for (int j = 0; j < Settings().sim_freq; j++)
+	{
+		for (int i = 0; i < physObjects.size(); i++)
+		{
+			physObjects[i].update();
+		}
+	}
 }
 
 void Environment::draw()

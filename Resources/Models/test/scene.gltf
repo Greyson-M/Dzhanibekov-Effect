@@ -15,28 +15,17 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"Cylinder",
-			"rotation":[
-				0.5,
-				-0.5,
-				-0.5,
-				0.5
-			],
+			"name":"Icosphere",
 			"scale":[
-				0.30000001192092896,
-				0.800000011920929,
-				0.30000001192092896
-			],
-			"translation":[
-				0,
-				1,
-				0
+				0.20000000298023224,
+				0.20000000298023224,
+				0.20000000298023224
 			]
 		}
 	],
 	"meshes":[
 		{
-			"name":"Cylinder.001",
+			"name":"Icosphere",
 			"primitives":[
 				{
 					"attributes":{
@@ -69,67 +58,67 @@
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":230,
+			"count":10040,
 			"max":[
-				1,
-				1,
-				2.1086225509643555
+				5.230508327484131,
+				3.1196820735931396,
+				0.9999999403953552
 			],
 			"min":[
-				-1,
-				-0.9999999403953552,
-				-6.391377925872803
+				-1.489491581916809,
+				-3.1103179454803467,
+				-0.9999999403953552
 			],
 			"type":"VEC3"
 		},
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":230,
+			"count":10040,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":230,
+			"count":10040,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":3,
 			"componentType":5123,
-			"count":444,
+			"count":11238,
 			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":2760,
+			"byteLength":120480,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":2760,
-			"byteOffset":2760,
+			"byteLength":120480,
+			"byteOffset":120480,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":1840,
-			"byteOffset":5520,
+			"byteLength":80320,
+			"byteOffset":240960,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":888,
-			"byteOffset":7360,
+			"byteLength":22476,
+			"byteOffset":321280,
 			"target":34963
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":8248,
+			"byteLength":343756,
 			"uri":"scene.bin"
 		}
 	]

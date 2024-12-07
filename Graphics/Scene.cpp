@@ -1,5 +1,5 @@
 #include "Scene.h"
-
+#include "../settings.h"
 
 Scene::Scene(int width, int height, const char* title)
 {	
@@ -66,6 +66,17 @@ Scene::Scene(int width, int height, const char* title)
 	const char* floor_path = "E:/Programming/physics/DzhanibekovEffect/c++vs/Renderer/Resources/Models/floor/scene.gltf";
 	floor_model = new Model(floor_path);
 	addModel(floor_model);
+
+	std::string light_path = Settings().resources_path + std::string("Models/cube/scene.gltf");
+	const char* light_path_c = light_path.c_str();
+	light_model = new Model(light_path_c);
+	addModel(light_model);
+
+	//translate light model to light position
+	glm::vec3 model_pos = light_model->getTranslation();
+	glm::vec3 light_pos = light.getPosition();
+	light_model->setTranslation(model_pos - light_pos);
+
 }
 
 Scene::~Scene()
@@ -80,7 +91,10 @@ Scene::~Scene()
 }
 
 void Scene::Draw()
-{
+{	
+	//check inputs
+	Inputs();
+
 	// Updates counter and times
 	crntTime = glfwGetTime();
 	timeDiff = crntTime - prevTime;
@@ -130,6 +144,64 @@ void Scene::Draw()
 void Scene::addModel(Model* model)
 {
 	models.push_back(model);
+}
+
+void Scene::Inputs()
+{// Check if the ESC key had been pressed or if the window had been closed
+	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS || glfwWindowShouldClose(window))
+		glfwSetWindowShouldClose(window, true);
+	{
+	}
+
+	float speed = 0.05f;
+
+	//move light position with arrow keys
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS)
+	{
+		light.setPosition(light.getPosition() + glm::vec3(0.0f, 0.0f, speed));
+		light.update();
+
+	}
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+	{
+		light.setPosition(light.getPosition() + glm::vec3(0.0f, 0.0f, -speed));
+		light.update();
+
+	}
+	if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
+	{
+		light.setPosition(light.getPosition() + glm::vec3(-speed, 0.0f, 0.0f));
+		light.update();
+
+	}
+	if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+	{
+		light.setPosition(light.getPosition() + glm::vec3(speed, 0.0f, 0.0f));
+		light.update();
+
+	}
+
+	//q and e to move light up and down
+	if (glfwGetKey(window, GLFW_KEY_Q) == GLFW_PRESS)
+	{
+		light.setPosition(light.getPosition() + glm::vec3(0.0f, speed, 0.0f));
+		light.update();
+
+	}
+	if (glfwGetKey(window, GLFW_KEY_E) == GLFW_PRESS)
+	{
+		light.setPosition(light.getPosition() + glm::vec3(0.0f, -speed, 0.0f));
+		light.update();
+
+	}
+	
+	light_model->setTranslation(light.getPosition());
+
+	////translate model position to light position
+	//glm::vec3 model_pos = light_model->getTranslation();
+	//glm::vec3 light_pos = light.getPosition();
+	//light_model->setTranslation(light_pos - model_pos);
+	//	
 }
 
 

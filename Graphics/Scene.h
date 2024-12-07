@@ -18,18 +18,20 @@ public:
 	Light* getLight() { return &light; }
 	Shader* getShader() { return &shaderProgram; }
 
-
-
 private:
 	int width, height;
 
 	Model* floor_model;
+	Model* light_model;
 
 	GLFWwindow* window;
 
 	Shader shaderProgram;
 	Camera camera;
 	Light light;
+
+	void Inputs();
+
 
 	//list of model objects
 	std::vector<Model*> models;

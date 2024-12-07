@@ -11,6 +11,11 @@ public:
 	Light();
 	~Light();
 
+	void setPosition(glm::vec3 pos) { position = pos; }
+	glm::vec3 getPosition() { return position; }
+
+	void update();
+
 private:
 	glm::vec3 position;
 	glm::vec4 color;

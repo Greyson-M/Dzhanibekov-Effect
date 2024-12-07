@@ -35,7 +35,11 @@ void main()
 	// calculates current position
 	crntPos = vec3(model * translation * rotation * scale * vec4(aPos, 1.0f));
 	// Assigns the normal from the Vertex Data to "Normal"
-	Normal = aNormal;
+	//Normal = aNormal;
+	//adjust the normal based on rotation 
+	Normal = vec3(rotation * vec4(aNormal, 1.0));
+
+
 	// Assigns the colors from the Vertex Data to "color"
 	color = aColor;
 	// Assigns the texture coordinates from the Vertex Data to "texCoord"

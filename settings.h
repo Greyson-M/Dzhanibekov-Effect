@@ -10,6 +10,9 @@ struct Settings
 
 	// Physics settings
 	glm::float32 floor_height = 0.0f;
-	glm::float32 dt = 0.06f;
+	glm::float64 dt = 0.0001f;
+	int sim_freq = 1000;
+
+	const char* resources_path = "E:/Programming/physics/DzhanibekovEffect/c++vs/Renderer/Resources/";
 
 };

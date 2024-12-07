@@ -13,12 +13,15 @@ PhysObject::PhysObject(Model model) : model(model)
 	compute_inertia_tensor(1.0f, &I, &com, &mass, &volume);
 
 	I_inv = glm::inverse(I);
-	L = glm::vec3(0.0f, 0.2f, 0.0f);
+	//L = glm::vec3(0.0f, 0.01f, 3.0f);
+	//L = glm::vec3(0.02f, 0.0f, 0.00001f);		//test2
+	L = glm::vec3(16.0f, 0.0f, 0.0f);			//test
 
 	//translate to COMs
 	glm::vec3 curr_pos = model.getTranslation();
 	model.setTranslation(curr_pos - com);
 
+	std::cout << "Mass: " << mass << std::endl;
 
 }
 
@@ -67,13 +70,28 @@ void PhysObject::update()
 	glm::quat q = model.getOrientation();
 	glm::quat q_dot = 0.5f * glm::quat(0.0f, omega.x, omega.y, omega.z) * q;
 
-	//glm::mat3 R_prime = R + Settings().dt * cross_mat(omega) * R;
+	//glm::mat3 R_prime = R + Settings().dt * glm::matrixCross3(omega) * R;
+	//glm::vec3 omega_cross_Rx = glm::cross(omega, R[0]);
+	//glm::vec3 omega_cross_Ry = glm::cross(omega, R[1]);
+	//glm::vec3 omega_cross_Rz = glm::cross(omega, R[2]);
+	//
+	//glm::mat3 R_prime = R + Settings().dt * glm::mat3(omega_cross_Rx, omega_cross_Ry, omega_cross_Rz);
 
-	glm::quat q_prime = glm::normalize(q + Settings().dt * q_dot);
+	//glm::mat3 R_prime = R + Settings().dt * glm::cross(omega, R);
+
+	//glm::quat q_prime = glm::normalize(q + Settings().dt * q_dot);
+	
+	//rk4 integration of q
+	glm::quat k1 = 0.5f * glm::quat(0.0f, omega.x, omega.y, omega.z) * q;
+	glm::quat k2 = 0.5f * glm::quat(0.0f, omega.x, omega.y, omega.z) * (q + 0.5f * Settings().dt * k1);
+	glm::quat k3 = 0.5f * glm::quat(0.0f, omega.x, omega.y, omega.z) * (q + 0.5f * Settings().dt * k2);
+	glm::quat k4 = 0.5f * glm::quat(0.0f, omega.x, omega.y, omega.z) * (q + Settings().dt * k3);
+
+	glm::quat q_prime = q + (Settings().dt / 6.0f) * (k1 + 2.0f * k2 + 2.0f * k3 + k4);
 
 	//R_prime = glm::orthonormalize(R_prime);
 
-	glm::mat3 ortho_check = R * R_T;
+	//glm::mat3 ortho_checkprime = R_prime * glm::transpose(R_prime);
 
 	//model.setOrientation(R_prime);
 	model.setOrientation(q_prime);
@@ -117,10 +135,11 @@ void PhysObject::compute_inertia_tensor(glm::float32 density, glm::mat3* I0_out,
 {
 	Mesh* mesh = model.getMesh(0);
 	
-	glm::float32 V = 0.0f;
-	glm::float32 mass = 0.0f;
-	glm::vec3 MassCenter = glm::vec3(0.0f, 0.0f, 0.0f);
-	glm::float32 Ia = 0.0f, Ib = 0.0f, Ic = 0.0f, Iap = 0.0f, Ibp = 0.0f, Icp = 0.0f;
+	glm::float64 V = 0.0;
+	glm::float64 mass = 0.0;
+	glm::f64vec3 massCenter = glm::f64vec3(0.0, 0.0, 0.0);
+	//glm::vec3 MassCenter = glm::vec3(0.0f, 0.0f, 0.0f);
+	glm::float64 Ia = 0.0, Ib = 0.0, Ic = 0.0, Iap = 0.0, Ibp = 0.0, Icp = 0.0;
 
 	std::vector<Vertex> vertices = mesh->vertices;
 	std::vector<GLuint> indices = mesh->indices;

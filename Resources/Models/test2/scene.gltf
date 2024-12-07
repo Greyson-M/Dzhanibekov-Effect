@@ -15,28 +15,12 @@
 	"nodes":[
 		{
 			"mesh":0,
-			"name":"Cylinder",
-			"rotation":[
-				0.5,
-				-0.5,
-				-0.5,
-				0.5
-			],
-			"scale":[
-				0.30000001192092896,
-				0.800000011920929,
-				0.30000001192092896
-			],
-			"translation":[
-				0,
-				1,
-				0
-			]
+			"name":"Icosphere"
 		}
 	],
 	"meshes":[
 		{
-			"name":"Cylinder.001",
+			"name":"Icosphere.003",
 			"primitives":[
 				{
 					"attributes":{
@@ -49,87 +33,71 @@
 			]
 		}
 	],
-	"textures" : [
-        {
-            "sampler" : 0,
-            "source" : 0
-        }
-    ],
-    "images" : [
-        {
-            "mimeType" : "image/png",
-            "name" : "diffuse",
-            "uri" : "baseColor.png"
-        },
-	{
-	    "uri" : "metallicRoughness.png"
-	}
-    ],
 	"accessors":[
 		{
 			"bufferView":0,
 			"componentType":5126,
-			"count":230,
+			"count":36677,
 			"max":[
-				1,
-				1,
-				2.1086225509643555
+				1.795218586921692,
+				0.5999986529350281,
+				0.19999992847442627
 			],
 			"min":[
-				-1,
-				-0.9999999403953552,
-				-6.391377925872803
+				-0.32291293144226074,
+				-0.6000013947486877,
+				-0.20000004768371582
 			],
 			"type":"VEC3"
 		},
 		{
 			"bufferView":1,
 			"componentType":5126,
-			"count":230,
+			"count":36677,
 			"type":"VEC3"
 		},
 		{
 			"bufferView":2,
 			"componentType":5126,
-			"count":230,
+			"count":36677,
 			"type":"VEC2"
 		},
 		{
 			"bufferView":3,
 			"componentType":5123,
-			"count":444,
+			"count":41562,
 			"type":"SCALAR"
 		}
 	],
 	"bufferViews":[
 		{
 			"buffer":0,
-			"byteLength":2760,
+			"byteLength":440124,
 			"byteOffset":0,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":2760,
-			"byteOffset":2760,
+			"byteLength":440124,
+			"byteOffset":440124,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":1840,
-			"byteOffset":5520,
+			"byteLength":293416,
+			"byteOffset":880248,
 			"target":34962
 		},
 		{
 			"buffer":0,
-			"byteLength":888,
-			"byteOffset":7360,
+			"byteLength":83124,
+			"byteOffset":1173664,
 			"target":34963
 		}
 	],
 	"buffers":[
 		{
-			"byteLength":8248,
+			"byteLength":1256788,
 			"uri":"scene.bin"
 		}
 	]

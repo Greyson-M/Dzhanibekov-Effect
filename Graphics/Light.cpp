@@ -32,6 +32,8 @@ Light::Light(Shader* shader_prog, glm::vec3 position, glm::vec4 color)
 
 }
 
+
+
 Light::Light()
 {
 	std::cerr << "Light object created without shader program" << std::endl;
@@ -40,4 +42,13 @@ Light::Light()
 Light::~Light()
 {
 	std::cerr << "Light object deleted" << std::endl;
+}
+
+void Light::update()
+{
+	model_mat = glm::mat4(1.0f);
+	model_mat = glm::translate(model_mat, position);
+	shaderProgram->Activate();
+	glUniform4f(glGetUniformLocation(shaderProgram->ID, "lightColor"), color.x, color.y, color.z, color.w);
+	glUniform3f(glGetUniformLocation(shaderProgram->ID, "lightPos"), position.x, position.y, position.z);
 }
