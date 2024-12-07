@@ -10,6 +10,6 @@ struct Settings
 
 	// Physics settings
 	glm::float32 floor_height = 0.0f;
-	glm::float32 dt = 0.01f;
+	glm::float32 dt = 0.06f;
 
 };

@@ -8,6 +8,8 @@
 #include<glm/gtc/type_ptr.hpp>
 #include<glm/gtx/rotate_vector.hpp>
 #include<glm/gtx/vector_angle.hpp>
+#include <glm/gtx/matrix_cross_product.hpp>
+#include <glm/gtx/orthonormalize.hpp>
 
 #include"shaderClass.h"
 

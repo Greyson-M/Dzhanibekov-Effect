@@ -39,6 +39,15 @@ void Model::setOrientation(glm::quat orientation)
 	}
 }
 
+void Model::setOrientation(glm::mat3 orientation)
+{
+	// Set the orientation of all meshes
+	for (unsigned int i = 0; i < rotationsMeshes.size(); i++)
+	{
+		rotationsMeshes[i] = glm::quat_cast(orientation);
+	}
+}
+
 void Model::setTranslation(glm::vec3 translation)
 {
 	// Set the translation of all meshes
@@ -62,6 +71,11 @@ glm::quat Model::getOrientation()
 	return this->rotationsMeshes[0];
 }
 
+glm::mat3 Model::getOrientation_mat()
+{
+	return glm::mat3_cast(this->rotationsMeshes[0]);
+}
+
 glm::vec3 Model::getTranslation()
 {
 	return this->translationsMeshes[0];
@@ -70,6 +84,11 @@ glm::vec3 Model::getTranslation()
 glm::vec3 Model::getScale()
 {
 	return this->scalesMeshes[0];
+}
+
+Mesh* Model::getMesh(unsigned int index)
+{
+	return &meshes[index];
 }
 
 void Model::loadMesh(unsigned int indMesh)

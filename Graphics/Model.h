@@ -16,12 +16,16 @@ public:
 	void Draw_model(Shader& shader, Camera& camera);
 
 	void setOrientation(glm::quat orientation);
+	void setOrientation(glm::mat3 orientation);
 	void setTranslation(glm::vec3 translation);
 	void setScale(glm::vec3 scale);
 
 	glm::quat getOrientation();
+	glm::mat3 getOrientation_mat();
 	glm::vec3 getTranslation();
 	glm::vec3 getScale();
+
+	Mesh* getMesh(unsigned int index);
 
 private:
 	// Variables for easy access
