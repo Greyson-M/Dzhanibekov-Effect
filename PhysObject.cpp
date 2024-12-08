@@ -13,15 +13,13 @@ PhysObject::PhysObject(Model model) : model(model)
 	compute_inertia_tensor(1.0f, &I, &com, &mass, &volume);
 
 	I_inv = glm::inverse(I);
-	//L = glm::f64vec3(0.0, 0.01, 3.0);
-	L = glm::f64vec3(0.02, 0.0001, 0.0);		//test2
-	//L = glm::f64vec3(25.0, 0.0, 0.0);			//test
+	//L = glm::f64vec3(0.0, 0.01, 3.0);			//top
+	//L = glm::f64vec3(0.02, 0.0001, 0.0);		//test2
+	L = glm::f64vec3(-25.0, 0.0, 0.1);			//test
 
 	//translate to COMs
 	glm::f64vec3 curr_pos = model.getTranslation();
 	model.setTranslation(curr_pos - com);
-
-	std::cout << "Mass: " << mass << std::endl;
 
 }
 
@@ -106,7 +104,11 @@ void PhysObject::update()
 	velocity += acceleration * (float)Settings().dt;
 	model.setTranslation(model.getTranslation() + velocity * (float)Settings().dt);
 	com += velocity * (float)Settings().dt;
+}
 
+glm::f64vec3 PhysObject::get_omega()
+{
+	return omega;
 }
 
 glm::float64 PhysObject::ComputeInertiaMoment(glm::f64vec3* P, int I){

@@ -2,6 +2,8 @@
 
 #include "Graphics/Model.h"
 #include "settings.h"
+#include <iostream>
+#include <fstream>
 
 
 class PhysObject
@@ -19,6 +21,10 @@ public:
 	void translate(glm::vec3 translation) { model.setTranslation(translation); }
 	void rotate(glm::quat rotation) { model.setOrientation(rotation); }
 	void scale(glm::vec3 scale) { model.setScale(scale); }
+
+	glm::f64vec3 get_omega();
+	void setMomentum(glm::f64vec3 L) { this->L = L; }
+	glm::f64vec3 getMomentum() { return L; }
 
 private:
 	Model model;
