@@ -65,12 +65,12 @@ Scene::Scene(int width, int height, const char* title)
 
 	const char* floor_path = "E:/Programming/physics/DzhanibekovEffect/c++vs/Renderer/Resources/Models/floor/scene.gltf";
 	floor_model = new Model(floor_path);
-	addModel(floor_model);
+	//addModel(floor_model);
 
 	std::string light_path = Settings().resources_path + std::string("Models/cube/scene.gltf");
 	const char* light_path_c = light_path.c_str();
 	light_model = new Model(light_path_c);
-	addModel(light_model);
+	//addModel(light_model);
 
 	//translate light model to light position
 	glm::vec3 model_pos = light_model->getTranslation();

@@ -1,0 +1,126 @@
+{
+	"asset":{
+		"generator":"Khronos glTF Blender I/O v4.3.47",
+		"version":"2.0"
+	},
+	"scene":0,
+	"scenes":[
+		{
+			"name":"Scene",
+			"nodes":[
+				0
+			]
+		}
+	],
+	"nodes":[
+		{
+			"mesh":0,
+			"name":"Cylinder.001",
+			"rotation":[
+				0,
+				0,
+				-0.7071068286895752,
+				0.7071068286895752
+			]
+		}
+	],
+	"meshes":[
+		{
+			"name":"Cylinder.002",
+			"primitives":[
+				{
+					"attributes":{
+						"POSITION":0,
+						"NORMAL":1,
+						"TEXCOORD_0":2
+					},
+					"indices":3
+				}
+			]
+		}
+	],
+	"textures" : [
+        {
+            "sampler" : 0,
+            "source" : 0
+        }
+    ],
+    "images" : [
+        {
+            "mimeType" : "image/png",
+            "name" : "diffuse",
+            "uri" : "baseColor.png"
+        },
+	{
+	    "uri" : "metallicRoughness.png"
+	}
+    ],
+	"accessors":[
+		{
+			"bufferView":0,
+			"componentType":5126,
+			"count":1658,
+			"max":[
+				3,
+				3.5830740928649902,
+				1
+			],
+			"min":[
+				-3,
+				-1.2569260597229004,
+				-1
+			],
+			"type":"VEC3"
+		},
+		{
+			"bufferView":1,
+			"componentType":5126,
+			"count":1658,
+			"type":"VEC3"
+		},
+		{
+			"bufferView":2,
+			"componentType":5126,
+			"count":1658,
+			"type":"VEC2"
+		},
+		{
+			"bufferView":3,
+			"componentType":5123,
+			"count":3300,
+			"type":"SCALAR"
+		}
+	],
+	"bufferViews":[
+		{
+			"buffer":0,
+			"byteLength":19896,
+			"byteOffset":0,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":19896,
+			"byteOffset":19896,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":13264,
+			"byteOffset":39792,
+			"target":34962
+		},
+		{
+			"buffer":0,
+			"byteLength":6600,
+			"byteOffset":53056,
+			"target":34963
+		}
+	],
+	"buffers":[
+		{
+			"byteLength":59656,
+			"uri":"scenehi.bin"
+		}
+	]
+}

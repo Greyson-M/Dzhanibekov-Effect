@@ -22,6 +22,50 @@ Mesh::Mesh(std::vector <Vertex>& vertices, std::vector <GLuint>& indices, std::v
 	EBO.Unbind();
 }
 
+//Mesh::Mesh(tinyobj::mesh_t* meshObj)
+//{
+//
+//	//for (auto& vertex : meshObj->)
+//	//{
+//	//	Vertex vert;
+//	//	vert.position = glm::vec3(vertex[0], vertex[1], vertex[2]);
+//	//	vert.normal = glm::vec3(vertex[3], vertex[4], vertex[5]);
+//	//	vert.color = glm::vec3(1.0f, 1.0f, 1.0f);
+//	//	vert.texUV = glm::vec2(vertex[6], vertex[7]);
+//	//	vertices.push_back(vert);
+//	//}
+//	for (auto& index : meshObj->indices)
+//	{
+//		auto ind = index.vertex_index;
+//	}
+//}
+
+//Mesh::Mesh(objl::Mesh* objMesh)
+//{
+//	//for (auto& vertex : objMesh->Vertices)
+//	//{
+//	//	Vertex vert;
+//	//	vert.position = glm::vec3(vertex.Position.X, vertex.Position.Y, vertex.Position.Z);
+//	//	vert.normal = glm::vec3(vertex.Normal.X, vertex.Normal.Y, vertex.Normal.Z);
+//	//	vert.color = glm::vec3(1.0f, 1.0f, 1.0f);
+//	//	vert.texUV = glm::vec2(vertex.TextureCoordinate.X, vertex.TextureCoordinate.Y);
+//	//	vertices.push_back(vert);
+//	//}
+//
+//	//for (auto& index : objMesh->Indices)
+//	//{
+//	//	indices.push_back(index);
+//	//}
+//
+//	////convert materials to textures
+//	//for (int i = 0; i < objMesh->MeshMaterial.map_Kd.size(); i++)
+//	//{
+//	//	objl::Material mat = objMesh->MeshMaterial;
+//	//	std::cout << "diffuse: " << mat.map_Kd[i] << std::endl;
+//	//}
+//
+//	
+//}
 
 void Mesh::Draw_mesh
 (

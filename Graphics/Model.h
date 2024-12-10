@@ -2,6 +2,7 @@
 #define MODEL_CLASS_H
 
 #include<json/json.hpp>
+
 #include"Mesh.h"
 
 using json = nlohmann::json;
@@ -27,6 +28,8 @@ public:
 
 	Mesh* getMesh(unsigned int index);
 
+	//tinyobj::ObjReader reader;
+
 private:
 	// Variables for easy access
 	const char* file;
@@ -46,6 +49,8 @@ private:
 
 	// Loads a single mesh by its index
 	void loadMesh(unsigned int indMesh);
+
+	void loadOBJ(const char* file);
 
 	// Traverses a node recursively, so it essentially traverses all connected nodes
 	void traverseNode(unsigned int nextNode, glm::mat4 matrix = glm::mat4(1.0f));

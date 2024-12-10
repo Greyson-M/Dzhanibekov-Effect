@@ -1,5 +1,8 @@
 #pragma once
 
+#ifndef ENVIRONMENT_H
+#define ENVIRONMENT_H
+
 #include "Graphics/Scene.h"
 #include "PhysObject.h"
 
@@ -30,3 +33,5 @@ private:
 	std::ofstream data_record;
 
 };
+
+#endif

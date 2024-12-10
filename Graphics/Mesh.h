@@ -7,6 +7,7 @@
 #include"EBO.h"
 #include"Camera.h"
 #include"Texture.h"
+//#include"tiny_obj_loader.h"
 
 class Mesh
 {
@@ -19,6 +20,8 @@ public:
 
 	// Initializes the mesh
 	Mesh(std::vector <Vertex>& vertices, std::vector <GLuint>& indices, std::vector <Texture>& textures);
+
+	//Mesh(tinyobj::mesh_t* meshObj);
 
 	// Draws the mesh
 	void Draw_mesh

@@ -2,6 +2,15 @@
 
 Model::Model(const char* file)
 {
+	//check if the file is an obj file
+	std::string fileStr = std::string(file);
+	std::string fileExtension = fileStr.substr(fileStr.find_last_of('.') + 1);
+	//if (fileExtension == "obj")
+	//{
+	//	loadOBJ(file);
+	//	return;
+	//}
+
 
 	meshes = std::vector<Mesh>();
 
@@ -114,6 +123,30 @@ void Model::loadMesh(unsigned int indMesh)
 
 	// Combine the vertices, indices, and textures into a mesh
 	meshes.push_back(Mesh(vertices, indices, textures));
+}
+
+void Model::loadOBJ(const char* file)
+{
+
+	//reader.ParseFromFile(file);
+	//std::vector<tinyobj::shape_t> shapes = reader.GetShapes();
+	//tinyobj::mesh_t mesh = shapes[0].mesh;
+
+
+	//// Load the OBJ file
+	//loader.LoadFile(file);
+	//
+	//// Go over all loaded meshes
+	//std::vector<objl::Mesh> meshes = loader.LoadedMeshes;
+
+	//for (auto& objMesh : meshes)
+	//{
+	//	// Convert the objl::Mesh to a Mesh
+	//	Mesh mesh = Mesh(&objMesh);
+	//	this->meshes.push_back(mesh);
+	//}
+
+
 }
 
 void Model::traverseNode(unsigned int nextNode, glm::mat4 matrix)
